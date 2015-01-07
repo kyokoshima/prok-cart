@@ -1,0 +1,227 @@
+.cartTablewrap {
+	border: 0 #777;
+	padding: 0;
+	margin: 0;
+	width: 700px;
+	height: 510px;
+	background-color: #fff;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.cartTablewrap tr{
+	offset: 0;
+}
+
+.cartTable {
+	width: 660px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+
+.cartTable td {
+	background-color: #fff;
+	border: 2px solid #bbbbbb;
+}
+
+.cartTable .rowHeader {
+	height: 40px;
+}
+
+.cartTable .rowHeader td {
+	background-color: #ddeeff;
+}
+
+.cartTable .footer td {
+	background-color: #ffffcc;
+}
+
+.cartTable td.header {
+	text-align: center;
+}
+
+.cartTable td.productCd {
+	width: 80px;
+}
+
+.cartTable td.productName {
+	width: 360px;
+}
+
+.cartTable td.price {
+	width: 90px;
+}
+
+.cartTable td.qty {
+	width: 70px;
+}
+
+.cartTable td.subTotal {
+	width: 90px;
+}
+
+.cartTable td.delete {
+	width: 50px;
+}
+
+.cartTable td.totalLabel{
+	width: 70px;
+}
+
+.cartTable td.total {
+	width: 90px;
+}
+.cartTable td.taxLabel {
+	width: 50px;
+}
+.cartTable td.left {
+	text-align: left;
+}
+
+.cartTable td.center {
+	text-align: center;
+}
+
+.cartTable td.right {
+	text-align: right;
+}
+
+.cartTable tr.footer {
+	height: 40px;
+
+}
+/*
+.required:after{
+	font-weight:bold;
+	color:red;
+	content:'*';
+}
+*/
+
+p.error {
+	font: smaller bold;
+	vertical-align: text-bottom;
+	color: red;
+	margin-bottom: 0;
+}
+
+.notice {
+	width: inherit;
+	margin: 0 auto 0 auto;
+	font: smaller bold;
+	vertical-align: text-bottom;
+	color: red;
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.accountTable {
+	width: 660px;
+	border-collapse: collapse;
+}
+
+.accountTable tr {
+	height: 40px;
+}
+
+.accountTable td {
+	border: 2px solid #bbb;
+}
+.accountTable td.label{
+	text-align: left;
+	width: 160px;
+	background-color: #ddeeff;
+}
+
+.accountTable td.value {
+	text-align: left;
+	width: 480px;
+	background-color: #fff;
+}
+
+
+.confirmTable {
+	width: 660px;
+	border-collapse: collapse;
+}
+
+.confirmTable tr {
+	height:40px;
+	background-color: #ddeeff;
+}
+
+.confirmTable td {
+	background-color: #fff;
+	border: 2px solid #bbb;
+}
+.confirmTable td.label {
+	background-color: #ddeeff;
+	width: 160px;
+}
+.confirmTable td.value {
+	width: 480px;
+}
+
+.confirmTable td.center {
+	text-align: center;
+}
+
+.confirmTable td.left {
+	text-align: left;
+}
+.confirmTable td.right {
+	text-align: right;
+}
+.confirmTable td.productCd {
+	width: 80px;
+}
+.confirmTable td.productName {
+	width: 360px;
+}
+
+.confirmTable td.price {
+	width: 90px;
+}
+
+.confirmTable td.qty {
+	width: 70px;
+}
+.confirmTable td.tax {
+	width: 50px;
+}
+.confirmTable td.total {
+	background-color: #ffffcc;
+}
+.confirmTable td.total.all {
+	background-color: #ffc0cb;
+}
+
+input.imeDisabled {
+	ime-mode: disabled;
+}
+
+.recieverTableHeader {
+	background-image: url("../img/check2.jpg");
+	height: 38px;
+	width: 660px;
+	margin: 0 auto 0 auto;
+}
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	display: none;
+}
+.loader {
+	height: 100%;
+	width: 100%;
+	background-image: url('/img/ajax-loader.gif');
+	background-position: center center;
+	background-repeat: no-repeat;
+	opacity: 1;
+}

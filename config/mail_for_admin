@@ -1,0 +1,49 @@
+注文受付番号  ：${order_number}
+ご注文年月日  ：${order_date}
+
+**** ご注文商品の内容 ****************************
+${orders}
+**************************************************
+お買上げ点数  ：${order_count}点
+--------------------------------------------------
+商品代金合計　　：${total_price}円
+消費税（8％）   ：${tax}円
+税込合計　　　　：${total_taxin_price}円
+配送費用        ：${total_shipping}円
+代引費用        ：${cod_fee}円
+クーポン適用　  ：${discount_price}円
+--------------------------------------------------
+お支払総合計：  ${all_costs}円
+--------------------------------------------------
+【ご注文者情報】
+ご注文者お名前：${order_name}
+担当者お名前  ：${order_charge}
+郵便番号      ：${order_zipcode}
+ご注文者住所  ：${order_pref} ${order_city} ${order_town} ${order_build_name}
+連絡先電話番号：${order_phone}
+連絡先FAX番号 ：${order_fax}
+メールアドレス：${order_mail}
+出荷の条件    ：${order_ship_condition}
+キャンペーン  ：${order_canpaign_code}
+備　　考      ：${order_remarks}
+
+--------------------------------------------------
+【配送先情報】
+配送先お名前  ：${reciever_name}
+担当者お名前  ：${reciever_charge}
+郵便番号      ：${reciever_zipcode}
+配送先ご住所  ：${reciever_pref} ${reciever_city} ${reciever_town} ${reciever_build_name}
+連絡先電話番号：${reciever_phone}
+配送予定日    ：${deliver_date}
+希望配送時間帯：${deliver_time}
+
+--------------------------------------------------
+【お支払い情報】
+お支払い方法  ：${payment}
+カード種別    ：${card_brand}
+カード名義    ：${card_account}
+カード番号    ：${card_number}
+有効期限      ：${card_expire}
+お支払い回数  ：${card_paycount}
+
+--------------------------------------------------

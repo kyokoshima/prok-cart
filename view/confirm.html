@@ -1,0 +1,220 @@
+<?php include 'header.html'; ?>
+
+<center>
+<table border="0" cellpadding="0" cellspacing="0" width="700" height="510" vspace="0" hspace="0" bordercolor="#777777" bgcolor="#ffffff">
+<tr><td width="700" height="500" valign="top" bgcolor="#555555"><br>
+
+<!--本分開始-->
+<center>
+<table border="1" cellpadding="5" cellspacing="0" width="680" height="490" vspace="0" hspace="0" bordercolor="#000000" bgcolor="#ffffff">
+<tr><td style="text-align: center;"><br>
+<img src="img/cart/cartsys3_1.gif" ><br><br>
+
+<!--カート内容-->
+<img src="img/check0.jpg" style="vertical-align: bottom;">
+<table class="confirmTable">
+<tr>
+<td class="label center productCd">商品番号</td>
+<td class="label center productName">商　品　名</td>
+<td class="label center price">販売価格</td>
+<td class="label center qty">数量</td>
+<td class="label center price">小計</td>
+<td class="label center tax">　</td>
+</tr>
+<?php if(!empty($orders)) : ?>
+<?php foreach($orders as $key => $value) :?>
+<tr>
+<td class="productCd left"><?php echo $value[PRD_CD]; ?></td>
+<td class="productName left"><?php echo $value[PRD_NAME]; ?></td>
+<td class="price right"><?php $this->h->echoPrice($value[PRD_PRICE]); ?></td>
+<td class="qty center"><?php echo $value[PRD_QTY]; ?></td>
+<td class="price right"><?php $this->h->echoPrice($value[PRD_PRICE] * $value[PRD_QTY]); ?></td>
+<td class="tax center">税別</td>
+</tr>
+<?php endforeach; ?>
+<?php endif; ?>
+
+<tr><td colspan="3" rowspan="7">　</td>
+	<td class="qty center total">合計</td>
+	<td class="price right total"><?php $this->h->echoPrice($totalPrice); ?></td>
+	<td class="tax center total">税別</td>
+</tr>
+<tr>
+	<td class="qty center total">消費税</td>
+	<td class="price right total"><?php $this->h->echoPrice($tax); ?></td>
+	<td class="tax center total"><?php echo "$taxRatio%"; ?></td>
+</tr>
+<tr>
+	<td class="qty center total">合計</td>
+	<td class="price right total"><?php $this->h->echoPrice($totalPrice + $tax); ?></td>
+	<td class="tax center total">税込</td>
+</tr>
+<tr>
+<td class="qty center total">送料</td>
+<td class="price right total"><?php $this->h->echoPrice($totalShipping); ?></td>
+<td class="tax center total">税込</td></tr>
+<tr>
+<td class="qty center total">代引費用</td>
+<td class="price right total"><?php $this->h->echoPrice($CODFee); ?></td>
+<td class="tax center total">税込</td></tr>
+<tr>
+<td class="qty center total">適用</td>
+<td class="price right total">
+<?php $this->h->echoPrice($discountPrice); ?>
+</td>
+<td class="tax center total">割引</td></tr>
+<tr>
+<td class="qty center total all">総計</td>
+<td class="price right total all"><?php $this->h->echoPrice($totalPrice + $totalShipping + $CODFee + $tax); ?></td>
+<td class="tax center total all">税込</td></tr>
+</table>
+<p>
+<img src="img/check1.jpg"  style="vertical-align: bottom;" />
+<table class="confirmTable">
+<tr>
+<td class="label">ご注文者お名前</td>
+<td class="value"><?php echo $account[ORD_NM]; ?></td></tr>
+<tr>
+<td class="label">担当者お名前</td>
+<td class="value"><?php echo $account[ORD_CG]; ?></td></tr>
+<tr>
+<td class="label">郵便番号</td>
+<td class="value"><?php echo $account[ORD_ZIP]; ?></td></tr>
+<tr>
+<td class="label">都道府県名</td>
+<td class="value"><?php echo $this->_getLabel(INI_PREF, $account[ORD_PREF]); ?></td></tr>
+<tr>
+<td class="label">市区町村</td>
+<td class="value"><?php echo $account[ORD_CITY]; ?></td></tr>
+<tr>
+<td class="label">町名地番</td>
+<td class="value"><?php echo $account[ORD_TOWN]; ?></td></tr>
+<tr>
+<td class="label">建物部屋番号</td>
+<td class="value"><?php echo $account[ORD_BUILD]; ?></td></tr>
+<tr>
+<td class="label">連絡先電話番号</td>
+<td class="value"><?php echo $account[ORD_PHONE]; ?></td></tr>
+<tr>
+<td class="label">連絡先ＦＡＸ番号</td>
+<td class="value"><?php echo $account[ORD_FAX]; ?></td></tr>
+<tr>
+<td class="label">メールアドレス</td>
+<td class="value"><?php echo $account[ORD_MAIL]; ?></td></tr>
+<tr>
+<td class="label">出荷の条件</td>
+<td class="value"><?php echo $this->_getLabel(INI_SC, $account[ORD_SHIP_COND]); ?></td></tr>
+<tr>
+<td class="label">備考</td>
+<td class="value" style="word-break: break-all;">
+<?php echo nl2br($account[ORD_REM]); ?>
+</td></tr>
+
+<tr>
+<td class="label">キャンペーンコード</td>
+<td class="value"><?php echo $account[ORD_C_CD]; ?></td></tr>
+</table>
+<br>
+<img src="img/check2.jpg"  style="vertical-align: bottom;" />
+<table class="confirmTable">
+<tr>
+<td class="label">配送先お名前/名称</td>
+<td class="value"><?php echo $account[RCV_NM]; ?></td></tr>
+<tr>
+<td class="label">担当者お名前</td>
+<td class="value"><?php echo $account[RCV_CG]; ?></td></tr>
+<tr>
+<td class="label">郵便番号</td>
+<td class="value"><?php echo $account[RCV_ZIP]; ?></td></tr>
+<tr>
+<td class="label">都道府県名</td>
+<td class="value"><?php echo $this->_getLabel(INI_PREF, $account[RCV_PREF]); ?></td></tr>
+<tr>
+<td class="label">市区町村</td>
+<td class="value"><?php echo $account[RCV_CITY]; ?></td></tr>
+<tr>
+<td class="label">町名地番</td>
+<td class="value"><?php echo $account[RCV_TOWN]; ?></td></tr>
+<tr>
+<td class="label">建物部屋番号</td>
+<td class="value"><?php echo $account[RCV_BUILD]; ?></td></tr>
+<tr>
+<td class="label">連絡先電話番号</td>
+<td class="value"><?php echo $account[RCV_PHONE]; ?></td></tr>
+<tr>
+<td class="label">配送指定日</td>
+<td class="value"><?php echo $this->_getLabelDeliverDate($account[ORD_DELIV_DT]); ?></td></tr>
+<tr>
+<td class="label">希望配送時間帯</td>
+<td class="value"><?php echo $this->_getLabel(INI_DT, $account[ORD_DELIV_TM]); ?></td></tr>
+
+</table>
+<br />
+<img src="img/check3.jpg" border="0" />
+<table class="confirmTable">
+<tr>
+<td class="label">お支払い方法</td>
+<td class="value">
+<?php echo $this->_getLabel(INI_PAYMENT, $account[PAYMENT]); ?>
+</td></tr>
+<tr>
+<td class="label">カード種別</td>
+<td class="value">
+<?php $this->echoPayment($account[PAYMENT], $this->_getLabel(INI_CARD_BRAND, $account[CARD_BRAND])); ?>
+</td></tr>
+<tr>
+<td class="label">カード名義</td>
+<td class="value">
+<?php $this->echoPayment($account[PAYMENT], $account[CARD_ACCOUNT]); ?></td></tr>
+<tr>
+<td class="label">カード番号</td>
+<td class="value">
+<?php $this->echoPayment($account[PAYMENT], $account[CARD_NUMBER]); ?></td></tr>
+<tr>
+<td class="label">カード有効期限</td>
+<td class="value">
+<?php
+	$this->echoPayment($account[PAYMENT], $account[CARD_MONTH] . '/' . $account[CARD_YEAR]);
+?>
+</td>
+</tr>
+<tr>
+<td class="label">お支払い回数</td>
+<td class="value">
+<?php echo $this->echoPayment($account[PAYMENT], $this->_getLabel(INI_CARD_PAYCOUNT, $account[CARD_PAYCOUNT])); ?>
+</td>
+</tr>
+<tr height="80"><td colspan="2" style="text-align: center;" >
+<form id="backForm" name="backForm" style="margin: auto; display: inline;" method="post">
+<input type="hidden" name="step" value="listProducts" />
+<input type="submit" name="backmodifyCart" value="カート内の商品変更">
+</form>
+<form method="post" style="margin: auto; display: inline;" method="post">
+<input type="hidden" name="step" value="inputAccount" />
+<input type="submit" name="backmodify" value="　再編集戻る　">
+</form>
+<form method="post" style="margin: auto; display: inline;" method="post">
+<input type="hidden" name="step" value="complete" />
+<input type="submit" name="order" value="　注文をする　">
+</form>
+</td></tr>
+</table>
+<div style="text-align: left;">
+
+<ul>
+<li style="list-style: none;">※注意事項</li>
+<li>ご注文の前に必ずメールアドレスを再確認して下さい。</li>
+<li>「注文をする」ボタンを押すとお店より自動メールが送信されます。</li>
+</ul>
+</div>
+<!--カート内容-->
+
+</td></tr>
+
+</table></center>
+
+<!--本分終了-->
+
+</td></tr>
+</table></center>
+<?php include 'footer.html'; ?>

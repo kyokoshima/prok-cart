@@ -1,0 +1,130 @@
+<?php include 'header.html'; ?>
+
+<script type="text/javascript" src="js/cart.js"></script>
+
+<center>
+<table class="cartTableWrap">
+<tr><td width="700" height="500" valign="top" bgcolor="#555555"><br>
+
+<!--本分開始-->
+
+<center><table border="1" cellpadding="5" cellspacing="0" width="680" height="490" vspace="0" hspace="0" bordercolor="#000000" bgcolor="#ffffff">
+<tr><td valign="top"><br>
+<center><img src="img/cart/cartsys1_1.gif" boder="0"></center><br><br>
+
+<!--カート内容-->
+<center><img src="img/check0.jpg" border="0"></center>
+<center><table cellpadding="5" class="cartTable">
+<tr class="rowHeader">
+<td class="productCd header">商品番号</td>
+<td class="productName header">商　品　名</td>
+<td class="price header">販売価格</td>
+<td class="qty header">数量</td>
+<td class="subTotal header">小計</td>
+<td class="delete header">削除</td>
+</tr>
+<?php if (isset($orders) && count($orders) > 0) : ?>
+	<?php	foreach($orders as $index => $order) : ?>
+	<?php
+			$productCodeName = PRD_CD . "[$index]";
+			$shippingWeightName = PRD_SW . "[$index]";
+			$cashOnDeliveryName = PRD_COD . "[$index]";
+			$qtyName = PRD_QTY . "[$index]";
+			$qtyId = PRD_QTY . "-" .$index;
+			$priceName = PRD_PRICE . "[$index]";
+			// print_r($order);
+	?>
+	<tr>
+		<td class="productCd left"><?php echo $order[PRD_CD] ?></td>
+		<td class="productName left"><?php echo $order[PRD_NAME] ?></td>
+		<td class="price right priceData" id="price-<?php echo $index; ?>"></td>
+		<td class="qty center">
+			<input type="text" name="<?php echo $qtyName; ?>" size="1" value="<?php echo $order[PRD_QTY]; ?>" style="text-align: right;"/>
+		</td>
+		<td class="subTotal right subTotalData" id="subtotal-<?php echo $index;?>"></td>
+		<td class="delete center">
+			<?php $this->h->hidden($productCodeName, $order[PRD_CD]); ?>
+			<?php $this->h->hidden($shippingWeightName, $order[PRD_SW]); ?>
+			<?php $this->h->hidden($cashOnDeliveryName, $order[PRD_COD]); ?>
+			<?php /* $this->h->hidden($qtyName, $order[PRD_QTY]); */ ?>
+			<?php $this->h->hidden($priceName, $order[PRD_PRICE]); ?>
+
+			<form method="post" action="?">
+				<input type="hidden" name="step" value="deleteCart" />
+				<?php $this->h->hidden('orderIndex', $index); ?>
+				<input type="submit" name="delet" value="削除">
+			</form>
+		</td>
+	</tr>
+	<?php endforeach; ?>
+<?php else : ?>
+	<tr>
+		<td colspan="6">商品はありません</td>
+	</tr>
+<?php endif; ?>
+<tr style=" height: 40px;">
+	<td colspan="3"></td>
+	<td style="text-align: center;">合計</td>
+	<td id="product-total" style="text-align: right;"></td>
+	<td style="text-align: center;">税別</td>
+</tr>
+<tr style=" height: 40px;">
+	<td colspan="3"></td>
+	<td style="text-align: center;">消費税</td>
+	<td id="tax" style="text-align: right;"></td>
+	<td style="text-align: center;">(<?php echo $taxRatio; ?>%)</td>
+</tr>
+<tr class="footer">
+<td colspan="3" align="center">
+<?php
+if (!empty($ref)){
+	$disabled = '';
+} else {
+	$disabled = 'disabled="disabled';
+}
+?>
+<?php
+/*
+<input type="button" name="back"
+	onclick="javascript:location.href='<?php echo $ref ?>'" value="買い物に戻る"
+	<?php echo $disabled; ?> />
+*/
+?>
+<form id="recalcForm" name="recalcForm" style="display: none;"></form>
+<input type="button" name="recalc" id="recalc" value="再計算をする" />
+</td>
+<td class="totalLabel center">合計</td>
+<td class="total right totalData"></td>
+<td class="taxLabel center">税込</td></tr>
+<tr height="80"><td colspan="6" align="center">
+<input type="button" name="back" id="close" value="買い物に戻る" />
+<form method="post" name="orderForm" style="display:inline;">
+<input type="hidden" name="step" value="inputAccount" />
+<input type="submit" name="delet" value="ご注文手続きへ">
+</form>
+</td></tr>
+</table></center>
+※注意事項
+<ul>
+<li>ご注文の前に必ず通信販売規定をご覧下さい。</li>
+<li>このページ内では数量を変更したり、注文商品の削除をすることができます。</li>
+<li>数量を変更した場合は、必ず再計算ボタンを押して下さい。</li>
+<li>配送料金については、次ページ以降のご注文者のご住所を入力後に表示されます。</li>
+<li>送料を含めた合計金額は、配送先入力後の最終確認画面にてご確認いただけます。</li>
+<li>以後のご注文に関する通信の全てはSSL暗号化処理されます。</li>
+<li>在庫がない商品については、ご注文後にご連絡を差し上げます。</li>
+</ul>
+
+<!--カート内容-->
+
+</td></tr>
+</table></center>
+
+<!--本分終了-->
+
+</td></tr>
+</table></center>
+<script type="text/javascript">
+	var taxRatio = <?php echo $taxRatio; ?>;
+</script>
+<?php include 'footer.html';?>

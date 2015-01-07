@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" cpmtemt="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>設定</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<ul class="nav nav-sidebar affix">
+					<li><a href="#ship-conditions">出荷条件</a></li>
+					<li><a href="#delivery-times">希望配送時間帯</a></li>
+					<li><a href="#payments">支払い方法</a></li>
+					<li><a href="#card-brand">カードブランド</a></li>
+					<li><a href="#card-brand">カード有効期限（年）</a></li>
+					<li><a href="#notice-1">注意事項１</a></li>
+					<li><a href="#notice-2">注意事項２</a></li>
+					<li><a href="#notice-3">注意事項３</a></li>
+					<li><a href="#shipping-price">送料</a></li>
+					<li><a href="#shipping-option">配送オプション</a></li>
+					<li><a href="#campaign">キャンペーン</a></li>
+					<li><a href="#order-address">受注メールアドレス</a></li>
+					<li><a href="#from-address">送信元メールアドレス</a></li>
+					<li><a href="#subject">メール件名</a></li>
+					<li><a href="#tax">消費税</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-9">
+				<form action="?step=confirm" method="post">
+					<div class="form-group">
+						<label for="" id="ship-conditions">出荷条件</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['shipConditions'] as $k => $v) : ?>
+							<tr>
+								<td><?php echo $k; ?></td>
+								<td>
+									<input type="text" name="shipConditions[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+								</td>
+							</tr>
+						<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="delivery-times">希望配送時間帯</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['deliveryTimes'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="deliveryTimes[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="card-brand">カードブランド</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['card_brands'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="card_brands[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="card-year">カード有効期限（年）</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['card_years'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="card_years[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="card-paycount">カード支払い方法</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['card_paycounts'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="card_paycounts[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="notice-1">注意事項１</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['notice1'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="notice1[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="notice-2">注意事項２</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['notice2'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="notice2[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="notice-3">注意事項３</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['notice3'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="notice3[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="shipping-price">送料</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<tr>
+								<td>青森～四国</td>
+								<td><input type="text" name="shipping_prices[0]" 
+										value="<?php echo $ini['shipping_prices'][0]; ?>" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<td>北海道・九州</td>
+								<td><input type="text" name="shipping_prices[1]" 
+										value="<?php echo $ini['shipping_prices'][1]; ?>" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<td>沖縄・離島</td>
+								<td><input type="text" name="shipping_prices[2]" 
+										value="<?php echo $ini['shipping_prices'][2]; ?>" class="form-control">
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="shipping-option">配送オプション</label>
+						<div class="checkbox">
+							<label for="">
+								<?php $limit_shipping_of_area = $ini['shipping_option']['limit_shipping_of_area']; ?>
+								<input type="checkbox" name="shipping_option['limit_shipping_of_area']"
+								<?php echo $limit_shipping_of_area ? 'checked="checked"' : ''; ?>
+								value="true">
+								地域の最大送料を適用
+							</label>
+						</div>
+						<div class="checkbox">
+							<label for="">
+								<?php $has_sw_is_zero = $ini['shipping_option']['has_sw_is_zero']; ?>
+								<input type="checkbox" name="shipping_option['has_sw_is_zero']"
+								<?php echo $has_sw_is_zero ? 'checked="checked"' : ''; ?>
+								value="true">トランザクション内にシッピングウェイトが0のものがあれば送料無料
+							</label>
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label for="">
+									<?php $over_price = $ini['shipping_option']['over_price']; ?>
+									<input type="checkbox" name="shipping_option['over_price']" 
+									<?php echo $over_price ? 'checked="checked"' : ''; ?>
+									value="true">購入価格がしきい値を超えたら送料無料
+								</label>
+								<div class="form-group">
+									<label for="">送料無料となるしきい値（金額）</label>
+									<input type="text" name="free_shipping_base_price[price]" class="form-control"
+									value="<?php echo $ini['free_shipping_base_price']['price']; ?>">
+								</div>
+							</div>
+						</div>
+						<div class="checkbox">
+							<label for="">
+								<?php $unification_price = $ini['shipping_option']['unification_price']; ?>
+								<input type="checkbox" name="shipping_option['unification_price']"
+								<?php echo $unification_price ? 'checked="checked"' : ''; ?>
+								value="true">
+								全国統一料金設定
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="" id="campaign">キャンペーン</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['campaign'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="campaign[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="order-address">受注メールアドレス</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<?php foreach($ini['order_address'] as $k => $v) : ?>
+								<tr>
+									<td><?php echo $k; ?></td>
+									<td>
+										<input type="text" name="order_address[<?php echo $k; ?>]" 
+										value="<?php echo $v; ?>" class="form-control">
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="from_address">注文確認送信元</label>
+						<table class="table">
+							<tr><th>ID</th><th>内容</th></tr>
+							<tr>
+								<td>送信元ラベル</td>
+								<td><input type="text" name="from_address[label]" 
+									value="<?php echo $ini['from_address']['label']; ?>" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<td>送信元メールアドレス</td>
+								<td><input type="text" name="from_address[address]" 
+									value="<?php echo $ini['from_address']['address']; ?>" class="form-control">
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="subject">メール件名</label>
+						<table class="table">
+							<tr>
+								<td>購入者用</td>
+								<td><input type="text" name="subject[to_user]" value="<?php echo $ini['subject']['to_user']; ?>"
+								class="form-control"></td>
+							</tr>
+							<tr>
+								<td>受注メール用</td>
+								<td><input type="text" name="subject[to_admin]" value="<?php echo $ini['subject']['to_admin']; ?>"
+								class="form-control"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="" id="tax">消費税</label>
+						<input type="text" name="tax[ratio]" value="<?php echo $ini['tax']['ratio']; ?>" class="form-control">
+					</div>
+					<button type="submit" class="btn btn-primary">保存</button>
+				</form>
+				<p>都道府県、カード有効期限（月）、カード支払い方法は除外</p>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

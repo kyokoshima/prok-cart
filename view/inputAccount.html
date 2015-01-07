@@ -1,0 +1,281 @@
+<?php include 'header.html'; ?>
+
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/jquery.autosave.js"></script>
+<script type="text/javascript" src="js/account.js"></script>
+
+<center>
+<table border="0" cellpadding="0" cellspacing="0" width="700" height="510" vspace="0" hspace="0" bordercolor="#777777" bgcolor="#ffffff">
+<tr><td width="700" height="500" valign="top" bgcolor="#555555"><br>
+
+<!--本文開始-->
+<form id="accountForm" method="post">
+<center><table border="1" cellpadding="5" cellspacing="0" width="680" height="490" vspace="0" hspace="0" bordercolor="#000000" bgcolor="#ffffff">
+<tr><td valign="top"><br>
+<center><img src="img/cart/cartsys2_1.gif" border="0"></center><br><br>
+<?php if (!empty($errors)){ ?>
+<div class="notice">入力エラーがあります。入力内容をご確認ください。</div>
+<?php } ?>
+<!--カート内容-->
+<center><img src="img/check1.jpg" border="0"></center>
+<center><table class="accountTable">
+<tr>
+	<td class="label required">ご注文者お名前</td>
+	<td class="value">
+	<?php $this->h->error(ORD_NM, @$errors); ?>
+	<?php $this->h->text(ORD_NM, 38, 'お名前', null, null, $accounts[ORD_NM]); ?>　※全角（個人名または会社名）
+	</td>
+</tr>
+<tr>
+	<td class="label">担当者お名前</td>
+	<td class="value">
+	<?php $this->h->text(ORD_CG, 38, 'お名前', null, null, $accounts[ORD_CG]); ?>　※全角（会社の場合）
+	</td>
+</tr>
+<tr>
+	<td class="label required">郵便番号</td>
+	<td class="value">
+	<?php $this->h->error(ORD_ZIP, @$errors); ?>
+	<?php $this->h->text(ORD_ZIP, 10, '例：231-0033',
+			null, 'imeDisabled', $accounts[ORD_ZIP], 8); ?>
+	<button type="button" class="search-address">住所を検索</button>
+	　※半角数字　例：231-0033
+	</td>
+</tr>
+<tr>
+	<td class="label required">都道府県名</td>
+	<td class="value">
+	<?php $this->h->error(ORD_PREF, @$errors); ?>
+	<?php $this->h->select(ORD_PREF, $prefs, '▼選択して下さい', null, null, $accounts[ORD_PREF]); ?>
+	</td>
+</tr>
+<tr>
+	<td class="label required">市区町村</td>
+	<td class="value">
+	<?php $this->h->error(ORD_CITY, @$errors); ?>
+	<?php $this->h->text(ORD_CITY, 45, '例：横浜市中区', null, null, $accounts[ORD_CITY]); ?>　※全角　例：横浜市中区
+	</td>
+</tr>
+<tr>
+	<td class="label required">町名地番</td>
+	<td class="value">
+	<?php $this->h->error(ORD_TOWN, @$errors); ?>
+	<?php $this->h->text(ORD_TOWN, 45, '例：長者町5-75-1', null, null, $accounts[ORD_TOWN]); ?>　例：長者町5-75-1
+	</td>
+</tr>
+<tr>
+	<td class="label">建物部屋番号</td>
+	<td class="value">
+	<?php $this->h->text(ORD_BUILD, 45, '例：スクエア長者町201', null, null, $accounts[ORD_BUILD]); ?>　例：スクエア長者町201
+	</td>
+</tr>
+<tr>
+	<td class="label required">連絡先電話番号</td>
+	<td class="value">
+	<?php $this->h->error(ORD_PHONE, @$errors); ?>
+	<?php $this->h->text(ORD_PHONE, 16, '連絡先電話番号', null, 'imeDisabled', $accounts[ORD_PHONE], 14); ?>　※半角数字
+	</td>
+</tr>
+<tr>
+	<td class="label">連絡先ＦＡＸ番号</td>
+	<td class="value">
+	<?php $this->h->error(ORD_FAX, @$errors); ?>
+	<?php $this->h->text(ORD_FAX, 16, '連絡先FAX番号', null, 'imeDisabled', $accounts[ORD_FAX], 14); ?>　※半角数字
+	</td>
+</tr>
+<tr>
+	<td class="label required">メールアドレス</td>
+	<td class="value">
+	<?php $this->h->error(ORD_MAIL, @$errors); ?>
+	<?php $this->h->text(ORD_MAIL, 50, 'メールアドレス', null, 'imeDisabled', $accounts[ORD_MAIL], 50); ?>　※半角英数字
+	</td>
+</tr>
+<tr>
+<td class="label required">出荷の条件</td>
+<td class="value">
+<?php $this->h->error(ORD_SHIP_COND, @$errors); ?>
+<?php $this->h->select(ORD_SHIP_COND, $shipConditions, '▼発送の条件を選択して下さい', null, null, $accounts[ORD_SHIP_COND]); ?>
+</td></tr>
+<tr>
+<td class="label">備考</td>
+<td class="value">
+<?php $this->h->text(ORD_REM, 50, null, null, $accounts[ORD_REM]); ?>
+
+</td></tr>
+<tr>
+<td class="label">キャンペーンコード</td>
+<td class="value">
+<?php $this->h->text(ORD_C_CD, 30, 'キャンペーンコード', null, null, $accounts[ORD_C_CD]); ?>
+</td></tr>
+<tr height="40"><td colspan="2" class="value"><br>
+<?php if (!empty($notice1)){ ?>
+※注意事項
+<ul>
+<?php foreach($notice1 as $key => $value) {
+	echo '<li>' . $value . '</li>';
+} ?>
+</ul>
+<?php } ?>
+</td></tr>
+</table></center>
+<br>
+<div class="recieverTableHeader"></div>
+<center><table class="accountTable">
+<tr>
+<td colspan="2" style="text-align: center; background-color: #fff;">
+<button type="button" class="copyAccount" >注文者情報をコピーする</button>
+</td>
+</tr>
+<tr>
+<td class="label required">配送先お名前/名称</td>
+<td class="value">
+<?php $this->h->error(RCV_NM, @$errors); ?>
+<?php $this->h->text(RCV_NM, 38, 'お名前', null, null, $accounts[RCV_NM]); ?>　※全角（個人名または会社名）</td></tr>
+<tr>
+<td class="label">担当者お名前</td>
+<td class="value">
+<?php $this->h->text(RCV_CG, 38, 'お名前', null, null, $accounts[RCV_CG]); ?>　※全角（会社の場合）</td></tr>
+<tr>
+<td class="label required">郵便番号</td>
+<td class="value">
+<?php $this->h->error(RCV_ZIP, @$errors); ?>
+<?php $this->h->text(RCV_ZIP, 10, '例：231-0033', null, 'imeDisabled', $accounts[RCV_ZIP], 8); ?>
+<button type="button" class="search-rcv-address">住所を検索</button>　※半角数字　例：231-0033</td></tr>
+<tr>
+<td class="label required">都道府県名</td>
+<td class="value">
+<?php $this->h->error(RCV_PREF, @$errors); ?>
+<?php $this->h->select(RCV_PREF, $prefs, '▼選択して下さい', null, null, $accounts[RCV_PREF]); ?>
+</td></tr>
+<tr>
+<td class="label required">市区町村</td>
+<td class="value">
+<?php $this->h->error(RCV_CITY, @$errors); ?>
+<?php $this->h->text(RCV_CITY, 45, '例：横浜市中区', null, null, $accounts[RCV_CITY]); ?>　※全角　例：横浜市中区</td></tr>
+<tr>
+<td class="label required">町名地番</td>
+<td class="value">
+<?php $this->h->error(RCV_TOWN, @$errors); ?>
+<?php $this->h->text(RCV_TOWN, 45, '例：長者町5-75-1', null, null, $accounts[RCV_TOWN]); ?>　例：長者町5-75-1</td></tr>
+<tr>
+<td class="label">建物部屋番号</td>
+<td class="value">
+<?php $this->h->text(RCV_BUILD, 45, '例：スクエア長者町201', null, null, $accounts[RCV_BUILD]); ?>　例：スクエア長者町201</td></tr>
+<tr>
+<td class="label required">連絡先電話番号</td>
+<td class="value">
+<?php $this->h->error(RCV_PHONE, @$errors); ?>
+<?php $this->h->text(RCV_PHONE, 16, '連絡先電話番号', null, 'imeDisabled', $accounts[RCV_PHONE], 14); ?>　※半角数字</td></tr>
+<tr>
+<td class="label required">配送指定日</td>
+<td class="value">
+<?php $this->h->error(ORD_DELIV_DT, @$errors); ?>
+<?php $this->h->select(ORD_DELIV_DT, $deliv_date, '▼選択して下さい', null, null, $accounts[ORD_DELIV_DT]); ?>　※在庫無き場合ご連絡
+</td></tr>
+<tr>
+<td class="label">希望配送時間帯</td>
+<td class="value">
+<?php $this->h->select(ORD_DELIV_TM, $dv_times, '▼選択して下さい', null, null, $accounts[ORD_DELIV_TM]); ?>　※メーカー直送品は時間選択不可
+</td></tr>
+<tr><td colspan="2" class="value"><br>
+<?php if (!empty($notice2)){ ?>
+※注意事項
+<ul>
+<?php foreach($notice2 as $key => $value) {
+	echo '<li>' . $value . '</li>';
+} ?>
+</ul>
+<?php } ?>
+</td></tr>
+</table></center>
+<br>
+<center><img src="img/check3.jpg" border="0"></center>
+<center><table class="accountTable">
+<tr>
+<td class="label required">お支払い方法</td>
+<td class="value">
+<?php
+	$this->h->radio(PAYMENT, $payments, $accounts[PAYMENT]);
+?>
+</td></tr>
+<tr>
+<td class="label">カード種別</td>
+<td class="value">
+<?php $this->h->error(CARD_BRAND, @$errors); ?>
+<?php
+	$this->h->radio(CARD_BRAND, $card_brands, $accounts[CARD_BRAND]);
+?>
+</td></tr>
+<tr>
+<td class="label">カード名義</td>
+<td class="value">
+<?php $this->h->error(CARD_ACCOUNT, @$errors); ?>
+<?php $this->h->text(CARD_ACCOUNT, 30, 'カード名義', null, 'imeDisabled', $accounts[CARD_ACCOUNT]); ?>　※半角ローマ字</td></tr>
+<tr>
+<td class="label">カード番号</td>
+<td class="value">
+<?php $this->h->error('card_number', @$errors); ?>
+<?php $this->h->text(CARD_NUMBER_1, 4, null, null, 'imeDisabled', $accounts[CARD_NUMBER_1], 4); ?>-
+<?php $this->h->text(CARD_NUMBER_2, 4, null, null, 'imeDisabled', $accounts[CARD_NUMBER_2], 4); ?>-
+<?php $this->h->text(CARD_NUMBER_3, 4, null, null, 'imeDisabled', $accounts[CARD_NUMBER_3], 4); ?>-
+<?php $this->h->text(CARD_NUMBER_4, 4, null, null, 'imeDisabled', $accounts[CARD_NUMBER_4], 4); ?>
+　※半角数字１６桁</td></tr>
+<tr>
+<td class="label">カード有効期限</td>
+<td class="value">
+<?php $this->h->error('card_expire_date', @$errors); ?>
+<?php
+	$this->h->select(CARD_MONTH, $card_months, '▼選択して下さい', null, null, $accounts[CARD_MONTH]);
+?>
+月／
+<?php
+	$this->h->select(CARD_YEAR, $card_years, '▼選択して下さい', null, null, $accounts[CARD_YEAR]);
+?>
+年
+</td></tr>
+<tr>
+<td class="label">お支払い回数</td>
+<td class="value">
+<?php $this->h->error(CARD_PAYCOUNT, @$errors); ?>
+<?php
+	$this->h->select(CARD_PAYCOUNT, $card_paycounts, '▼選択して下さい', null, null, $accounts[CARD_PAYCOUNT]);
+?>
+　</td></tr>
+<tr><td colspan="2" class="value"><br>
+<?php if (!empty($notice3)){ ?>
+※注意事項
+<ul>
+<?php foreach($notice3 as $key => $value) {
+	echo '<li>' . $value . '</li>';
+} ?>
+</ul>
+<?php } ?>
+</td></tr>
+<tr height="120"><td colspan="2" style="background-color: #fff; text-align: center;">
+<br>
+<input type="checkbox" name="saveCookie" />入力内容をパソコン（Cookie）に保存する<br />
+<br>
+<input type="button" id="backStep" value="　前に戻る　" />
+<input type="reset" value="　全てリセット　">
+<input type="hidden" name="step" value="confirm" />
+<input type="submit" name="order" value="　確認画面に進む　">
+
+</td></tr>
+</table></center>
+
+<!--カート内容-->
+
+</td></tr>
+</table></center>
+</form>
+<!--本分終了-->
+<form id="backForm" name="backForm">
+<input type="hidden" name="step" value="listProducts" />
+</form>
+</td></tr>
+</table></center>
+<div class="loading">
+<div class="loader"></div>
+</div>
+<?php include 'footer.html'; ?>
+
