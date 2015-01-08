@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>確認</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<form action="?step=complete" method="post">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					下記内容でconfig.iniが更新されます。よろしいですか？
+				</div>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<th>キー</th>
+							<th>変更前</th>
+							<th>変更後</th>
+						</tr>
+						<?php foreach($changed as $k => $v) : ?>
+							<tr>
+								<td><?php echo $k; ?>
+									<input type="hidden" name="<?php echo $v['key']; ?>" value="<?php echo $v['new']; ?>">
+								</td>
+								<td><?php echo $v['org']; ?></td>
+								<td><?php echo $v['new']; ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<button type="button" class="btn btn-default" id="cancel">キャンセル</button>
+					<button type="submit" class="btn btn-primary">更新</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#cancel').on('click', function(){
+		history.back();
+	});
+});
+</script>
+</body>
+</html>

@@ -124,7 +124,18 @@ if (!empty($ref)){
 
 </td></tr>
 </table></center>
+<form action="" id="test_form" accept-charset="Shift_JIS">
+<input type="hidden" name="product_code" value="99999">
+<input type="hidden" name="product_name" value="テスト用商品">
+<input type="hidden" name="price" value="1000">
+<input type="hidden" name="qty" value="1">
+<input type="hidden" name="shipping_weight" value="0">
+<input type="hidden" name="cash_on_delivery" value="1">
+<input type="hidden" name="step" value="addCart">
+<button type="submit" id="test_cart">テスト用商品</button>
+</form>
 <script type="text/javascript">
 	var taxRatio = <?php echo $taxRatio; ?>;
 </script>
+
 <?php include 'footer.html';?>
