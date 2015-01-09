@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title><?php echo $title; ?></title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+	<div class="nav navbar-default" role="navigation">
+		<div class="container">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="">config編集</a></li>
+				<li><a href="setting_mail.php?t=user">購入者用メール本文編集</a></li>
+				<li><a href="setting_mail.php?t=admin">管理者用メール本文編集</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<?php if (isset($message)) : ?>
+			<div class="row">
+				<div class="alert alert-info">
+					<?php if (is_array($message)) : ?>
+						<ul class="list-unstyled">
+							<?php foreach($message as $m) : ?>
+								<li>
+									<?php echo $m; ?>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					<?php else : ?>
+						<?php echo $message; ?>
+					<?php endif; ?>
+				</div>
+			</div>
+		<?php endif; ?>
+		<div class="row">
+			<div class="col-xs-12">
+					<form action="setting_mail.php" method="post">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">内容を修正してください</h3>
+							</div>
+							<div class="panel-body">
+								<textarea name="mail_content" id="" class="form-control" rows="30">
+<?php echo $mail_content; ?></textarea>
+								<input type="hidden" name="t" value="<?php echo $target; ?>">
+								<input type="hidden" name="step" value="confirm">
+							</div>
+							<div class="panel-footer">
+								<button type="submit" class="btn btn-primary btn-block">更新</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

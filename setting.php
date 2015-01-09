@@ -126,10 +126,12 @@ class Setting {
 		}
 		file_put_contents($path, $content);
 	}
+
 }
 
 $step = isset($_REQUEST['step']) ? $_REQUEST['step'] : null;
 $setting = new Setting();
+
 if ($step == 'confirm') {
 	$setting->confirm();
 } else if ($step == 'complete') {
