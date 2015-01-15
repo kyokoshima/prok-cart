@@ -3,12 +3,14 @@ require_once 'app/constants.php';
 class Setting {
 
 	function view(){
-		$ini = parse_ini_file(CONFIG, true);
-		include PATH_ROOT.'/view/setting.html';
+		// $ini = parse_ini_file(CONFIG, true);
+		include PATH_ROOT.'/view/setting_menu.html';
 	}
 
 	function create_changed($parent, $child, $orginal, $new_value) {
-		return ["${parent}.${child}" => ['org' => $original, 'new' => $new_value, 'key' => "${parent}[${child}]"]];
+		return array("${parent}.${child}" => 
+				array(
+					'org' => $original, 'new' => $new_value, 'key' => "${parent}[${child}]"));
 	}
 
 	function extract_changes($new_value) {
@@ -29,7 +31,7 @@ class Setting {
 					// echo '</pre>';
 					$new_val = $vv;
 					if ($org_val != $new_val) {
-						$changed["${k}.${kk}"] = ['org' => $org_val, 'new' => $new_val, 'key' => "${k}[$kk]"];
+						$changed["${k}.${kk}"] = array('org' => $org_val, 'new' => $new_val, 'key' => "${k}[$kk]");
 					}
 				}
 				// 変更前のconfigに存在しており、新しい方に存在していない場合
@@ -38,7 +40,7 @@ class Setting {
 						// echo "新しい値： ${k}.${kk}";
 						$org_val = $vv;
 						$new_val = null;
-						$changed["${k}.${kk}"] = ['org' => $org_val, 'new' => $new_val, 'key' => "${k}[$kk]"];
+						$changed["${k}.${kk}"] = array('org' => $org_val, 'new' => $new_val, 'key' => "${k}[$kk]");
 					}
 				}
 			}
@@ -127,6 +129,14 @@ class Setting {
 		file_put_contents($path, $content);
 	}
 
+}
+
+if (!isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
+	or $_SERVER['PHP_AUTH_USER'] !== 'admin'
+	or $_SERVER['PHP_AUTH_PW'] !== '7941'){
+	header('WWW-Authenticate: Basic realm="Enter username and password."');
+	header('Content-Type: text/plain; charset=utf-8');
+	die();
 }
 
 $step = isset($_REQUEST['step']) ? $_REQUEST['step'] : null;

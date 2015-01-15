@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>変更確認</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<form action="setting_config.php" method="post">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						この内容でconfig.iniを更新します。よろしいですか？
+					</h3>
+				</div>
+				<div class="panel-body">
+					<pre><?php echo $content_diff; ?></pre>
+				</div>
+				<div class="panel-footer">
+					<div class="form-group">
+						<input type="hidden" name="content" value="<?php echo htmlentities($content); ?>">
+						<input type="hidden" name="step" value="complete">
+						<a href="setting_config.php" class="btn btn-default">キャンセル</a>
+						<button type="submit" class="btn btn-primary">更新</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/setting.js"></script>
+</body>
+</html>

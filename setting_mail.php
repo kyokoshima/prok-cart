@@ -79,6 +79,14 @@ class SettingMail {
 	}
 }
 
+if (!isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
+	or $_SERVER['PHP_AUTH_USER'] !== 'admin'
+	or $_SERVER['PHP_AUTH_PW'] !== '7941'){
+	header('WWW-Authenticate: Basic realm="Enter username and password."');
+	header('Content-Type: text/plain; charset=utf-8');
+	die();
+}
+
 $setting = new SettingMail();
 $target = isset($_REQUEST['t']) ? $_REQUEST['t'] : null;
 $step = isset($_REQUEST['step']) ? $_REQUEST['step'] : null;
